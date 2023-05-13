@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+         #
+#    By: alex <alex@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/13 13:20:31 by alejarod          #+#    #+#              #
-#    Updated: 2023/05/13 14:42:26 by alejarod         ###   ########.fr        #
+#    Updated: 2023/05/13 21:56:40 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIBFT_A = $(LIBFT_PATH)/libft.a
 
 # Project sources and objects
 SRCS_PATH = ./srcs
-SRCS = main.c utils.c
+SRCS = main.c utils.c free_error.c
 HEADER = $(SRCS_PATH)/pipex.h
 
 OBJS_PATH = ./objs
@@ -40,14 +40,12 @@ OBJS = $(addprefix $(OBJS_PATH)/, $(SRCS:.c=.o))
 $(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-
-
 # rules
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo $(GREEN)"compiling libft!"$(RESET_BLACK)
-	MAKE -C $(LIBFT_PATH)
+	make -C $(LIBFT_PATH)
 	@echo $(GREEN)"libft compiled!"$(RESET_BLACK)
 	$(CC) $^ $(LIBFT_A) -o $@
 	@echo $(GREEN)"pipex compiled !"$(RESET_BLACK)
@@ -58,7 +56,7 @@ $(OBJS_PATH):
 
 sanitize:
 
-valgrind: 
+valgrind:
 
 normi:
 	norminette $(SRCS_PATH)/*.c $(HEADER)
@@ -66,13 +64,13 @@ normi:
 # removes the .o files
 clean:
 	@$(RM) -rf $(OBJS_PATH)
-	MAKE -C $(LIBFT_PATH) clean
+	make -C $(LIBFT_PATH) clean
 	@echo $(RED)"OBJS DELETED !"$(RESET_BLACK)
 
 # removes .o files & push_swap executable
 fclean: clean
 	@$(RM) $(NAME)
-	MAKE -C $(LIBFT_PATH) fclean
+	make -C $(LIBFT_PATH) fclean
 	@echo $(RED)"pipex deleted !"$(RESET_BLACK)
 
 re: fclean all
