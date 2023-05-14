@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 14:11:44 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/13 22:26:24 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/14 16:00:06 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_init_struct(t_path* main)
+{
+	printf("entered initit\n");
+	//int i = 0;
+	main->path = NULL;
+	main->path_matrix = NULL;
+	//main->final_matrix = NULL;
+	
+}
 
 // temporary function
 void ft_print_env(char** env)
@@ -59,16 +69,20 @@ char* ft_get_path(char** envp)
 }
 
 // SEGUIR AQUI COMO HAGO JOIN
-char**	ft_add_char(char** path_matrix)
+/* char**	ft_add_char(char** path_matrix)
 {
 	int i;
 	char**	final_matrix;
 
+	final_matrix = NULL;
 	i = 0;
 	while (path_matrix[i])
 	{
-		final_matrix[i] = ft_strjoin(path_matrix[i], "/");
+		final_matrix[i] = ft_strdup(path_matrix[i]);
+		
+		final_matrix[i] = ;
 		i++;
 	}
 	return (final_matrix);
 }
+ */

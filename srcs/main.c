@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 10:18:46 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/13 22:19:58 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/14 17:03:20 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ we need to do a split and treat them as separate paths
 */
 int	main(int argc, char** argv, char** envp)
 {
-		//ft_find_path(env);
-	char*	path;
-	char**	path_matrix;
-	char**	final_matrix;
+	//ft_find_path(env);
+	t_path	main;
 	
+	ft_init_struct(&main);
 	if (argc == 5)
 	{
 		// open infile 
@@ -42,14 +41,20 @@ int	main(int argc, char** argv, char** envp)
 			ft_exit_error(2);
 		// find path
 		//ft_print_env(envp);
-		path = ft_get_path(envp);
+		main.path = ft_get_path(envp);
 		//printf("%s\n", path);
-		path_matrix = ft_split(path, ':');
-		ft_print_env(path_matrix);
-		final_matrix = ft_add_char(path_matrix);
-		ft_print_env(final_matrix);
+		main.path_matrix = ft_split(main.path, ':');
+		ft_print_env(main.path_matrix);
+		//main.final_matrix = ft_add_char(main.path_matrix);
+		//ft_print_env(main.final_matrix);
+		// I NEED TO ADD THE FINAL /
+		pipe(main.fd);
+		printf("pipe fd[0] is %d\n", main.fd[0]);
+		printf("pipe fd[1] is %d\n", main.fd[1]);
+		//main.pid = fork();
 		
 		
+
 		// creates pipe and fork
 		// execute command and redirect output
 		//
@@ -62,6 +67,8 @@ int	main(int argc, char** argv, char** envp)
 		ft_exit_error(3);
 	
 	// FREE THE SPLIT (CHAR** path matrix)
-	ft_general_free(path_matrix);
+	//ft_general_free(&main);
+	// APUNTAR !!!!
+	system("leaks pipex");
 	return (0);
 }

@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   free_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:52:03 by alex              #+#    #+#             */
-/*   Updated: 2023/05/13 22:06:49 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/14 15:30:56 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_general_free(char** path_matrix)
+void	ft_general_free(t_path* main)
 {
 	int	i;
 
 	i = 0;
- 	if (!path_matrix)
+ 	if (!main->path_matrix)
 		return ;
-	while (path_matrix[i])
+	while (main->path_matrix[i])
 	{
-		free(path_matrix[i]);
+		free(main->path_matrix[i]);
 		i++;
 	}
-	free(path_matrix);
+	free(main->path_matrix);
 }
 
 void	ft_exit_error(int err_code)
