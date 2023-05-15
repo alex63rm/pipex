@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+         #
+#    By: alex <alex@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/13 13:20:31 by alejarod          #+#    #+#              #
-#    Updated: 2023/05/14 15:36:41 by alejarod         ###   ########.fr        #
+#    Updated: 2023/05/15 19:53:25 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME = pipex
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g # -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra # -g -fsanitize=address
 SANITIZE = -g3 -fsanitize=address
 VALGRIND = -g
 RM = rm

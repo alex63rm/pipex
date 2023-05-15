@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 10:18:46 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/14 17:03:20 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/15 19:59:28 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	main(int argc, char** argv, char** envp)
 		printf("pipe fd[0] is %d\n", main.fd[0]);
 		printf("pipe fd[1] is %d\n", main.fd[1]);
 		//main.pid = fork();
-		
+		printf("parent pid is: |%d|\n", getpid());
+		printf("parent or parent pid is: |%d|\n", getppid());
 		
 
 		// creates pipe and fork
@@ -69,6 +70,6 @@ int	main(int argc, char** argv, char** envp)
 	// FREE THE SPLIT (CHAR** path matrix)
 	//ft_general_free(&main);
 	// APUNTAR !!!!
-	system("leaks pipex");
+	// system("leaks pipex");
 	return (0);
 }
