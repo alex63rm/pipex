@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 10:18:46 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/16 21:44:48 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/16 23:56:42 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char** argv, char** envp)
 		//main.final_matrix = ft_add_char(main.path_matrix);
 		//ft_print_env(main.final_matrix);
 		// I NEED TO ADD THE FINAL /
-		main.final_matrix = ft_add_char(main.path_matrix, main.final_matrix);
+		main.final_matrix = ft_add_char(&main);
 		printf("---------------final matrix-------------\n");
 		ft_print_env(main.path_matrix);
 		

@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 12:49:57 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/16 21:36:34 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/16 23:57:20 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ char**	ft_split(char const *s, char c);
 char*	ft_strchr(const char *s, int c);
 char*	ft_strjoin(char const *s1, char const *s2);
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlen(const char *s);
-
-
-
 //----------------------------------MAIN-------------------------------------
 
 void	ft_init_struct(t_path* main);
@@ -49,7 +44,7 @@ void	ft_exit_error(int err_code);
 char*	ft_get_path(char** env);
 void	ft_print_env(char** env);	// DELETE
 void	ft_general_free(t_path* main);
-char**	ft_add_char(char** path_matrix, char** final_matrix);
+char**	ft_add_char(t_path* main);
 void	ft_fork(t_path* main);
 
 

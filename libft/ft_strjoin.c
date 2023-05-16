@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 13:10:41 by alejarod          #+#    #+#             */
-/*   Updated: 2022/09/28 21:37:11 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:26:19 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char*	ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	n;
 	size_t	i;

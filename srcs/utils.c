@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 14:11:44 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/16 21:50:03 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/17 00:12:37 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_init_struct(t_path* main)
 	main->path = NULL;
 	main->path_matrix = NULL;
 	main->final_matrix = NULL;
-	
 }
 
 // temporary function
@@ -75,19 +74,23 @@ char* ft_get_path(char** envp)
 This function takes the path matrix and will add the final '/' so that
 all the directories can be used later on to find the commands
 */
-char**	ft_add_char(char** path_matrix, char **final_matrix)
+char**	ft_add_char(t_path* main)
 {
 	int 	i;
 	//char**	final_matrix;
 
 	//final_matrix = NULL;
 	// ¿POR QUE NECESITO ESTA IGUALDAD????
-	final_matrix = path_matrix;
+	//main->final_matrix = (char**)malloc(sizeof(char *) * 100);
+	// AQUI TENGO MEMORY LEAKS
+	main->final_matrix = main->path_matrix;
 	i = 0;
-	while (path_matrix[i])
+	while (main->path_matrix[i])
 	{
-		final_matrix[i] = ft_strjoin(path_matrix[i], "/");
+		main->final_matrix[i] = ft_strjoin(main->path_matrix[i], "/");
+		printf("lines are %s\n", main->final_matrix[i]);
 		i++;
 	}
-	return (final_matrix);
+	//ft_general_free(main);
+	return (main->final_matrix);
 }

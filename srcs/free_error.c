@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:52:03 by alex              #+#    #+#             */
-/*   Updated: 2023/05/16 21:47:11 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/17 00:12:23 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_general_free(t_path* main)
 	int	i;
 
 	i = 0;
- 	if (!main->path_matrix)
+	if (main->path_matrix == NULL)
 		return ;
 	while (main->path_matrix[i])
 	{
@@ -30,6 +30,20 @@ void	ft_general_free(t_path* main)
 		i++;
 	}
 	free(main->path_matrix);
+	main->path_matrix = NULL;
+	
+	//  SI PONGO ESTO TENGO SIGSEV
+/* 	i = 0;
+	if (!main->final_matrix)
+		return ;
+	while (main->final_matrix[i])
+	{
+		free(main->final_matrix[i]);
+		i++;
+	}
+	free(main->final_matrix);
+	main->final_matrix = NULL;
+	 */
 }
 
 /*
