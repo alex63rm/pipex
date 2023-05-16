@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 10:18:46 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/15 19:59:28 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/16 21:44:48 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,29 @@ int	main(int argc, char** argv, char** envp)
 		//main.final_matrix = ft_add_char(main.path_matrix);
 		//ft_print_env(main.final_matrix);
 		// I NEED TO ADD THE FINAL /
-		pipe(main.fd);
+		main.final_matrix = ft_add_char(main.path_matrix, main.final_matrix);
+		printf("---------------final matrix-------------\n");
+		ft_print_env(main.path_matrix);
+		
+
+		
+		//pipe(main.fd);
 		printf("pipe fd[0] is %d\n", main.fd[0]);
 		printf("pipe fd[1] is %d\n", main.fd[1]);
+		// HERE, create another funtcion < 25 lines
 		//main.pid = fork();
 		printf("parent pid is: |%d|\n", getpid());
 		printf("parent or parent pid is: |%d|\n", getppid());
-		
+		//ft_fork(&main);
 
-		// creates pipe and fork
-		// execute command and redirect output
-		//
-		
 
 		
+
+		// FREE THE SPLIT (CHAR** path matrix)
+		ft_general_free(&main);
 	}
 	else
 		// ft_exit_error
 		ft_exit_error(3);
-	
-	// FREE THE SPLIT (CHAR** path matrix)
-	//ft_general_free(&main);
-	// APUNTAR !!!!
-	// system("leaks pipex");
 	return (0);
 }

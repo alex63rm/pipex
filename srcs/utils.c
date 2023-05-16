@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 14:11:44 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/14 16:00:06 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:50:03 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/*
+Initialize the struct variables to point to null until they are ready to be
+used
+*/
 void	ft_init_struct(t_path* main)
 {
-	printf("entered initit\n");
-	//int i = 0;
+	printf("entered init\n");
 	main->path = NULL;
 	main->path_matrix = NULL;
-	//main->final_matrix = NULL;
+	main->final_matrix = NULL;
 	
 }
 
@@ -68,21 +71,23 @@ char* ft_get_path(char** envp)
 	return (NULL);
 }
 
-// SEGUIR AQUI COMO HAGO JOIN
-/* char**	ft_add_char(char** path_matrix)
+/*
+This function takes the path matrix and will add the final '/' so that
+all the directories can be used later on to find the commands
+*/
+char**	ft_add_char(char** path_matrix, char **final_matrix)
 {
-	int i;
-	char**	final_matrix;
+	int 	i;
+	//char**	final_matrix;
 
-	final_matrix = NULL;
+	//final_matrix = NULL;
+	// ¿POR QUE NECESITO ESTA IGUALDAD????
+	final_matrix = path_matrix;
 	i = 0;
 	while (path_matrix[i])
 	{
-		final_matrix[i] = ft_strdup(path_matrix[i]);
-		
-		final_matrix[i] = ;
+		final_matrix[i] = ft_strjoin(path_matrix[i], "/");
 		i++;
 	}
 	return (final_matrix);
 }
- */

@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   free_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 21:52:03 by alex              #+#    #+#             */
-/*   Updated: 2023/05/14 15:30:56 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:47:11 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/*
+This function will be called before the main returns or before any exit
+function, to ensure all the dynamically allocated memory has been freed
+before the program ends
+*/
 void	ft_general_free(t_path* main)
 {
 	int	i;
@@ -27,8 +32,13 @@ void	ft_general_free(t_path* main)
 	free(main->path_matrix);
 }
 
+/*
+This function will print a specific message depending on the 
+error message received as argument
+*/
 void	ft_exit_error(int err_code)
 {
+	// REMOVE PRINTF!!!!!
 	if (err_code == 1)
 		printf("Error. Input file not found\n");
 	if (err_code == 2)
