@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 12:49:57 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/16 23:57:20 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/17 23:50:46 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 //--------------------------------STRUCT-------------------------------------
 
@@ -40,7 +41,7 @@ char*	ft_strjoin(char const *s1, char const *s2);
 //----------------------------------MAIN-------------------------------------
 
 void	ft_init_struct(t_path* main);
-void	ft_exit_error(int err_code);
+void	ft_exit_error(int err_code, t_path* main);
 char*	ft_get_path(char** env);
 void	ft_print_env(char** env);	// DELETE
 void	ft_general_free(t_path* main);

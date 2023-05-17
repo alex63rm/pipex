@@ -6,7 +6,7 @@
 #    By: alex <alex@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/13 13:20:31 by alejarod          #+#    #+#              #
-#    Updated: 2023/05/15 19:53:25 by alex             ###   ########.fr        #
+#    Updated: 2023/05/17 23:40:29 by alex             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIBFT_A = $(LIBFT_PATH)/libft.a
 
 # Project sources and objects
 SRCS_PATH = ./srcs
-SRCS = main.c utils.c free_error.c
+SRCS = main.c utils.c free_error.c fork.c
 HEADER = $(SRCS_PATH)/pipex.h
 
 OBJS_PATH = ./objs

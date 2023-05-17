@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 10:18:46 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/16 23:56:42 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/18 00:01:09 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	main(int argc, char** argv, char** envp)
 	{
 		// open infile 
 		if (open(argv[1], O_RDONLY) < 0)
-			ft_exit_error(1);
+			ft_exit_error(1, NULL);
 		// open outfile
 		if (open(argv[4], O_WRONLY | O_CREAT, 0644) < 0)
-			ft_exit_error(2);
+			ft_exit_error(2, NULL);
 		// find path
 		//ft_print_env(envp);
 		main.path = ft_get_path(envp);
@@ -51,26 +51,17 @@ int	main(int argc, char** argv, char** envp)
 		main.final_matrix = ft_add_char(&main);
 		printf("---------------final matrix-------------\n");
 		ft_print_env(main.path_matrix);
-		
-
-		
-		//pipe(main.fd);
-		printf("pipe fd[0] is %d\n", main.fd[0]);
-		printf("pipe fd[1] is %d\n", main.fd[1]);
-		// HERE, create another funtcion < 25 lines
-		//main.pid = fork();
-		printf("parent pid is: |%d|\n", getpid());
-		printf("parent or parent pid is: |%d|\n", getppid());
-		//ft_fork(&main);
+		ft_fork(&main);
 
 
 		
-
+		// this code is also part of the child
+		printf("MAIN final print\n");
 		// FREE THE SPLIT (CHAR** path matrix)
 		ft_general_free(&main);
 	}
 	else
 		// ft_exit_error
-		ft_exit_error(3);
+		ft_exit_error(3, NULL);
 	return (0);
 }
