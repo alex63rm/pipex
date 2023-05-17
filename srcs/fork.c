@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 23:39:28 by alex              #+#    #+#             */
-/*   Updated: 2023/05/18 00:18:36 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/18 00:37:44 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	ft_fork(t_path* main)
 		{
 			printf("I am in the child\n");
 			printf("child pid is: |%d|\n", getpid());
-			//return ;
+			// I can even finish the child process
+			//ft_exit_error(3, NULL); 
+			return ;
 		}
 		else
 		{
@@ -35,5 +37,4 @@ void	ft_fork(t_path* main)
 			printf("parent pid is: |%d|\n", getpid());
 
 		}
-		
 }

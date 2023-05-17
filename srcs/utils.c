@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 14:11:44 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/17 00:12:37 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/18 00:34:22 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char* ft_get_path(char** envp)
 		}
 		i++;
 	}
-	ft_exit_error(4);
+	ft_exit_error(4, NULL);
 	return (NULL);
 }
 
