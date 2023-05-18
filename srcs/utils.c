@@ -3,25 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 14:11:44 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/18 00:34:22 by alex             ###   ########.fr       */
+/*   Created: 2023/05/18 19:12:49 by alejarod          #+#    #+#             */
+/*   Updated: 2023/05/18 21:03:37 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 /*
-Initialize the struct variables to point to null until they are ready to be
-used
+It is a good practice to initialize all the variables inside the struct 
+until they are ready to be used
 */
-void	ft_init_struct(t_path* main)
+void	ft_init_struct(t_path* main, char** argv)
 {
-	printf("entered init\n");
 	main->path = NULL;
 	main->path_matrix = NULL;
 	main->final_matrix = NULL;
+	main->cmd_one = argv[2];
+	main->cmd_two = argv[3];
+	printf("finished initializing variables\n");
 }
 
 // temporary function
@@ -59,7 +61,6 @@ char* ft_get_path(char** envp)
 				printf("found path\n");
 				temp_path = envp[i];
 				final_path = ft_strchr(temp_path, '/');
-				printf("final path is |%s|\n", final_path);
 				return (final_path);
 			}
 			j++;
@@ -88,7 +89,7 @@ char**	ft_add_char(t_path* main)
 	while (main->path_matrix[i])
 	{
 		main->final_matrix[i] = ft_strjoin(main->path_matrix[i], "/");
-		printf("lines are %s\n", main->final_matrix[i]);
+		//printf("paths are %s\n", main->final_matrix[i]);
 		i++;
 	}
 	//ft_general_free(main);

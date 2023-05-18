@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 21:52:03 by alex              #+#    #+#             */
-/*   Updated: 2023/05/17 23:51:59 by alex             ###   ########.fr       */
+/*   Created: 2023/05/18 19:12:35 by alejarod          #+#    #+#             */
+/*   Updated: 2023/05/18 20:58:24 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_general_free(t_path* main)
 		i++;
 	}
 	free(main->path_matrix);
-	main->path_matrix = NULL;
 	
 	//  SI PONGO ESTO TENGO SIGSEV
 /* 	i = 0;
@@ -54,16 +53,19 @@ void	ft_exit_error(int err_code, t_path* main)
 {
 	// REMOVE PRINTF!!!!!
 	if (err_code == 1)
-		printf("Error. Input file not found\n");
-	if (err_code == 2)
-		printf("Error. Unable to create output file\n");
+		printf("Error. Input or output file error\n");
+/* 	if (err_code == 2)
+		printf("Error. Unable to create output file\n"); */
 	if (err_code == 3)
-		printf("Error. Argc < 5\n");
+		printf("Error. Argc != 5\n");
 	if (err_code == 4)
 		printf("Error. Path not found\n");
 	if (err_code == 5)
 		printf("Error. Unable to create pid fork\n");
-	
+	if (err_code == 6)
+		printf("Error. Unable to run execve()\n");
+	if (err_code == 7)
+		printf("Error. Unable to save argument list\n");
 	
 	ft_general_free(main);
 	
