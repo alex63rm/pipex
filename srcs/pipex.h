@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:43 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/18 20:48:45 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:30:07 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 typedef	struct s_path
 {
-	int		in_fd;
-	int		out_fd;
+	int		fd_in;
+	int		fd_out;
 	char*	path;
 	char**	path_matrix;  // this is the matrix without the last /
 	char**	final_matrix; // (this is the matrix with the last /)

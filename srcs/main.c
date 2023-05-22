@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:26 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/18 21:03:48 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:38:14 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ int	main(int argc, char** argv, char** envp)
 	{
 		ft_init_struct(&main, argv);
 		// open infile 
-		main.in_fd = open(argv[1], O_RDONLY);
-		printf("in_fd is |%d|\n", main.in_fd);
+		main.fd_in = open(argv[1], O_RDONLY);
+		printf("in_fd is |%d|\n", main.fd_in);
 		// open/create outfile
-		main.out_fd = open(argv[4], O_WRONLY | O_CREAT, 0644);
-		printf("out_fd is |%d|\n", main.out_fd);
-		if (main.in_fd < 0 || main.out_fd < 0)
+		main.fd_out = open(argv[4], O_WRONLY | O_CREAT, 0644);
+		printf("out_fd is |%d|\n", main.fd_out);
+		if (main.fd_in < 0 || main.fd_out < 0)
 			ft_exit_error(1, NULL);
 		// find path
 		//ft_print_env(envp);
@@ -62,6 +62,7 @@ int	main(int argc, char** argv, char** envp)
 		printf("MAIN final print\n");
 		// FREE THE SPLIT (CHAR** path_matrix)
 		ft_general_free(&main);
+		// close all the fds??
 	}
 	else
 		// ft_exit_error

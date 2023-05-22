@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:13:30 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/18 21:36:22 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:39:51 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,20 @@ in a 2D array (or list of arrays)
 */
 static void	ft_child(t_path* main, char** envp)
 {
+	printf("entered ft_child\n");
+	// read from the infile
+	dup2(main->fd_in, STDIN_FILENO);
 	// write to fd[1], the pipe
 	dup2(main->fd[1], STDOUT_FILENO);
-	printf("entered ft_child\n");
+	// close what is not needed
 	close(main->fd[1]);
 	close(main->fd[0]);
-	dup2(main->fd_in, STDIN_FILENO);
 	close(main->fd_in);
 	close(main->fd_out);
-
+	printf("this should be sent to the pipe");
+	ft_join_command(main->final_matrix, main->cmd_one);
+	
+	
 	// SEGUIR AQUI CON LA EJECUCION
 	(void)envp;
 /* 	main->cmd_list = ft_split(main->cmd_one, ' ');
