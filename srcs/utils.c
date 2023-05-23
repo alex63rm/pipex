@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:49 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/18 21:03:37 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/23 22:24:42 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 It is a good practice to initialize all the variables inside the struct 
 until they are ready to be used
 */
-void	ft_init_struct(t_path* main, char** argv)
+void	ft_init_struct(t_path* main)
 {
 	main->path = NULL;
 	main->path_matrix = NULL;
 	main->final_matrix = NULL;
-	main->cmd_one = argv[2];
-	main->cmd_two = argv[3];
+	main->cmd_list = NULL;
 	printf("finished initializing variables\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:26 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/22 21:38:14 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/23 23:00:09 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char** argv, char** envp)
 
 	if (argc == 5)
 	{
-		ft_init_struct(&main, argv);
+		ft_init_struct(&main);
 		// open infile 
 		main.fd_in = open(argv[1], O_RDONLY);
 		printf("in_fd is |%d|\n", main.fd_in);
@@ -50,13 +50,11 @@ int	main(int argc, char** argv, char** envp)
 		//printf("%s\n", path);
 		main.path_matrix = ft_split(main.path, ':');
 		//ft_print_env(main.path_matrix);
-		//ft_print_env(main.final_matrix);
-		// I NEED TO ADD THE FINAL /
 		main.final_matrix = ft_add_char(&main);
 		printf("---------------final matrix-------------\n");
-		ft_print_env(main.path_matrix);
+		ft_print_env(main.final_matrix);
 		printf("---------------final matrix-------------\n");
-		ft_fork(&main, envp);
+		ft_fork(&main, envp, argv);
 		
 		// this code is also part of the child
 		printf("MAIN final print\n");

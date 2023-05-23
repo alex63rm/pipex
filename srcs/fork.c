@@ -6,11 +6,38 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:13:30 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/22 21:39:51 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/23 23:02:57 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+/*
+This function joins the path and the command name (without the option
+labels). It loops over all the paths and checks if the file exists with the 
+access function.
+*/
+
+static int	ft_join_command(char** final_matrix, char* cmd_name)
+{
+	
+	printf("cmd name is: |%s|\n", cmd_name);
+	int		i;
+	char*	path_command;
+
+	i = 0;
+	while (final_matrix[i])
+	{
+		path_command = ft_strjoin(final_matrix[i], cmd_name);
+		if (access(path_command, F_OK) == 0)
+			return (0);
+		i++;
+	}
+	
+	// if not found
+	return (1);
+}
+
 
 /*
 FD workflow:
@@ -27,7 +54,7 @@ Next, check the command and the path for execution.
 This function first splits the first command that we received and saves it
 in a 2D array (or list of arrays)
 */
-static void	ft_child(t_path* main, char** envp)
+static void	ft_child(t_path* main, char** envp, char** argv)
 {
 	printf("entered ft_child\n");
 	// read from the infile
@@ -40,8 +67,13 @@ static void	ft_child(t_path* main, char** envp)
 	close(main->fd_in);
 	close(main->fd_out);
 	printf("this should be sent to the pipe");
-	ft_join_command(main->final_matrix, main->cmd_one);
-	
+	main->cmd_list = ft_split(argv[2], 32);
+	if (ft_join_command(main->final_matrix, main->cmd_list[0]) == 1)
+		ft_exit_error(8, main);
+
+	// SEGUIR AQUI
+	// perror prints to 2, so I can see it in the screen
+	perror("|||||command_found||||||");
 	
 	// SEGUIR AQUI CON LA EJECUCION
 	(void)envp;
@@ -66,7 +98,7 @@ It returns the pid of the child to the parent
 It returns -1 if there was an error
 Very important, make the parent wait for the child to finish
 */
-void	ft_fork(t_path* main, char** envp)
+void	ft_fork(t_path* main, char** envp, char** argv)
 {
 		pipe(main->fd);
 		printf("pipe fd[0] is %d\n", main->fd[0]);
@@ -78,7 +110,7 @@ void	ft_fork(t_path* main, char** envp)
 		{
 			printf("I am in the child\n");
 			printf("child pid is: |%d|\n", getpid());
-			ft_child(main, envp);
+			ft_child(main, envp, argv);
 			
 			// I can even finish the child process
 			//ft_exit_error(3, NULL); 

@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:43 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/22 20:30:07 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/23 22:59:51 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ typedef	struct s_path
 	char**	final_matrix; // (this is the matrix with the last /)
 	int		pid;
 	int		fd[2];
-	char*	cmd_one;
-	char*	cmd_two;
 	char**	cmd_list;
 	
 } t_path;
@@ -45,13 +43,14 @@ char*	ft_strjoin(char const *s1, char const *s2);
 
 //----------------------------------MAIN-------------------------------------
 
-void	ft_init_struct(t_path* main, char** argv);
+void	ft_init_struct(t_path* main);
 void	ft_exit_error(int err_code, t_path* main);
 char*	ft_get_path(char** env);
 void	ft_print_env(char** env);	// DELETE
 void	ft_general_free(t_path* main);
 char**	ft_add_char(t_path* main);
-void	ft_fork(t_path* main, char** envp);
+void	ft_fork(t_path* main, char** envp, char** argv);
+
 
 
 #endif

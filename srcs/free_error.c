@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:35 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/18 20:58:24 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/23 22:54:08 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	ft_general_free(t_path* main)
 	int	i;
 
 	i = 0;
-	if (main->path_matrix == NULL)
-		return ;
-	while (main->path_matrix[i])
+	if (main->path_matrix != NULL)
 	{
-		free(main->path_matrix[i]);
-		i++;
+		while (main->path_matrix[i])
+		{
+			free(main->path_matrix[i]);
+			i++;
+		}
+		free(main->path_matrix);
 	}
-	free(main->path_matrix);
-	
 	//  SI PONGO ESTO TENGO SIGSEV
 /* 	i = 0;
 	if (!main->final_matrix)
@@ -41,8 +41,17 @@ void	ft_general_free(t_path* main)
 		i++;
 	}
 	free(main->final_matrix);
-	main->final_matrix = NULL;
 	 */
+	i = 0;
+	if (main->cmd_list != NULL)
+	{
+		while (main->cmd_list[i])
+		{
+			free(main->cmd_list[i]);
+			i++;
+		}
+		free(main->cmd_list);
+	}
 }
 
 /*
@@ -66,6 +75,8 @@ void	ft_exit_error(int err_code, t_path* main)
 		printf("Error. Unable to run execve()\n");
 	if (err_code == 7)
 		printf("Error. Unable to save argument list\n");
+	if (err_code == 8)
+		printf("Error. Command not found");
 	
 	ft_general_free(main);
 	
