@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:43 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/23 22:59:51 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/26 21:05:24 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef	struct s_path
 	int		pid;
 	int		fd[2];
 	char**	cmd_list;
+	char*	path_command;
 	
 } t_path;
 

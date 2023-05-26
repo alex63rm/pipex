@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:13:30 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/23 23:02:57 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/26 21:23:18 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,33 @@
 /*
 This function joins the path and the command name (without the option
 labels). It loops over all the paths and checks if the file exists with the 
-access function.
+access function. If the command is not found or cannot be accessed, the 
+function returns 1.
 */
 
-static int	ft_join_command(char** final_matrix, char* cmd_name)
+static int	ft_join_command(t_path *main)
 {
-	
-	printf("cmd name is: |%s|\n", cmd_name);
+	fprintf(stderr, "entered ft_join_command\n");
 	int		i;
 	char*	path_command;
 
 	i = 0;
-	while (final_matrix[i])
+	while (main->final_matrix[i])
 	{
-		path_command = ft_strjoin(final_matrix[i], cmd_name);
+		
+		main->path_command = ft_strjoin(main->final_matrix[i], main->cmd_list[0]);
+		
+		// VER XQ NO ME COGE EL PATH, IGUAL QUITAR LA PRIMERA / ???
+		fprintf(stderr, "path is: %s\n", main->path_command);	
 		if (access(path_command, F_OK) == 0)
+		{
+			fprintf(stderr, "path is: %s\n", main->path_command);	
 			return (0);
+		}
+		// puede haber leaks?
+		free(main->path_command);
 		i++;
 	}
-	
 	// if not found
 	return (1);
 }
@@ -51,12 +59,15 @@ In this case, we also have an infile instead of just stdin.
 
 Next, check the command and the path for execution.
 
-This function first splits the first command that we received and saves it
-in a 2D array (or list of arrays)
+This function first splits the first command and its options or flags and saves it
+in a 2D array (or list of arrays).
 */
 static void	ft_child(t_path* main, char** envp, char** argv)
 {
-	printf("entered ft_child\n");
+	int	i;
+
+	i = 0;
+	//printf("entered ft_child\n");
 	// read from the infile
 	dup2(main->fd_in, STDIN_FILENO);
 	// write to fd[1], the pipe
@@ -66,29 +77,19 @@ static void	ft_child(t_path* main, char** envp, char** argv)
 	close(main->fd[0]);
 	close(main->fd_in);
 	close(main->fd_out);
-	printf("this should be sent to the pipe");
 	main->cmd_list = ft_split(argv[2], 32);
-	if (ft_join_command(main->final_matrix, main->cmd_list[0]) == 1)
+	fprintf(stderr, "first command is: ||%s||\n", main->cmd_list[0]);
+	if (ft_join_command(main) == 1)
 		ft_exit_error(8, main);
 
-	// SEGUIR AQUI
 	// perror prints to 2, so I can see it in the screen
-	perror("|||||command_found||||||");
-	
+	fprintf(stderr, "|||||command_found||||||\n");
+	write(2, "test\n", 5);
 	// SEGUIR AQUI CON LA EJECUCION
-	(void)envp;
-/* 	main->cmd_list = ft_split(main->cmd_one, ' ');
 	if(!main->cmd_list)
 		ft_exit_error(7, main);
-	ft_print_env(main->cmd_list);
-	while(main->final_matrix[i])
-	{
-		
-	}
-	(void)
-	execve(main->f) */
-/* 	if (execve() == -1)
-		ft_exit_error(6, &main); */
+	if (execve(main->path_command, main->cmd_list, envp) != 0)
+		ft_exit_error(6, main);
 }
 
 /*

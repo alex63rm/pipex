@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:35 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/23 22:54:08 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/26 21:16:20 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_exit_error(int err_code, t_path* main)
 	if (err_code == 7)
 		printf("Error. Unable to save argument list\n");
 	if (err_code == 8)
-		printf("Error. Command not found");
+		perror("Error. Command not found in PATH\n");
 	
 	ft_general_free(main);
 	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 21:06:25 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/16 23:47:45 by alex             ###   ########.fr       */
+/*   Updated: 2023/05/26 19:26:11 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ char	**ft_split(char const *s, char c)
 		}
 		i++;
 	}
-	new[word_nb] = '\0';
+	new[word_nb] = 0;
 	return (new);
 }
