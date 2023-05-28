@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:26 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/28 20:41:56 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/28 22:12:38 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char** argv, char** envp)
 		main.fd_out = open(argv[4], O_WRONLY | O_CREAT, 0644);
 		printf("out_fd is |%d|\n", main.fd_out);
 		if (main.fd_in < 0 || main.fd_out < 0)
-			ft_exit_error(1, NULL);
+			ft_exit_error(1, &main);
 		// find path
 		//ft_print_env(envp);
 		main.path = ft_get_path(envp);
