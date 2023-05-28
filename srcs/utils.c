@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:49 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/28 12:55:33 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:42:30 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char**	ft_add_char(t_path* main)
 		//printf("paths are %s\n", main->final_matrix[i]);
 		i++;
 	}
+
 	//ft_general_free(main);
 	return (main->final_matrix);
 }
-

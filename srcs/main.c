@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:26 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/28 14:46:05 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:41:56 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int argc, char** argv, char** envp)
 	//ft_find_path(env);
 	t_path	main;
 	
-
 	if (argc == 5)
 	{
 		ft_init_struct(&main, argv);
@@ -65,9 +64,10 @@ int	main(int argc, char** argv, char** envp)
 		// find path
 		//ft_print_env(envp);
 		main.path = ft_get_path(envp);
-		//printf("%s\n", path);
+		//printf("%s\n", main.path);
 		main.path_matrix = ft_split(main.path, ':');
 		//ft_print_env(main.path_matrix);
+		// CREO QUE AQUI TENGO LEAK, EN FT_ADD_CHAR
 		main.final_matrix = ft_add_char(&main);
 		printf("---------------final matrix-------------\n");
 		ft_print_env(main.final_matrix);
@@ -81,7 +81,9 @@ int	main(int argc, char** argv, char** envp)
 		// close all the fds??
 	}
 	else
-		// ft_exit_error
-		ft_exit_error(3, NULL);
+	{
+		perror("Error. Argc != 5");
+		exit (1);
+	}
 	return (0);
 }

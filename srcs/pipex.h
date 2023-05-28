@@ -6,22 +6,22 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:43 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/28 14:34:36 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:42:01 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <sys/wait.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <sys/wait.h>
 
 //--------------------------------STRUCT-------------------------------------
 
-typedef	struct s_path
+typedef	struct	s_path
 {
 	int		fd_in;
 	int		fd_out;
