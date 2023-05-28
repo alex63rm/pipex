@@ -6,12 +6,30 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:26 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/26 19:29:24 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/28 14:46:05 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "pipex.h"
+
+/*
+It is a good practice to initialize all the variables inside the struct 
+until they are ready to be used. I also need it to save the argv, because they
+are only available in the first instance of the program. When the program gets 
+replaced by execve, all the previous information that was not saved is lost
+*/
+static void	ft_init_struct(t_path* main, char** argv)
+{
+	main->path = NULL;
+	main->path_matrix = NULL;
+	main->final_matrix = NULL;
+	main->cmd_one = argv[2];
+	main->cmd_two = argv[3];
+	main->cmd_list = NULL;
+	printf("finished initializing variables\n");
+}
+
 /*
 argv[0], argv[1], argv[2], argv[3], argv[4]
 ./pipex  infile    cmd1     cmd2	outfile
@@ -35,7 +53,7 @@ int	main(int argc, char** argv, char** envp)
 
 	if (argc == 5)
 	{
-		ft_init_struct(&main);
+		ft_init_struct(&main, argv);
 		// open infile 
 		main.fd_in = open(argv[1], O_RDONLY);
 		printf("in_fd is |%d|\n", main.fd_in);
@@ -54,7 +72,7 @@ int	main(int argc, char** argv, char** envp)
 		printf("---------------final matrix-------------\n");
 		ft_print_env(main.final_matrix);
 		printf("---------------final matrix-------------\n");
-		ft_fork(&main, envp, argv);
+		ft_fork(&main, envp);
 		
 		// this code is also part of the child
 		printf("MAIN final print\n");

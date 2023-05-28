@@ -6,24 +6,12 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:49 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/23 22:24:42 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/28 12:55:33 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-/*
-It is a good practice to initialize all the variables inside the struct 
-until they are ready to be used
-*/
-void	ft_init_struct(t_path* main)
-{
-	main->path = NULL;
-	main->path_matrix = NULL;
-	main->final_matrix = NULL;
-	main->cmd_list = NULL;
-	printf("finished initializing variables\n");
-}
 
 // temporary function
 void ft_print_env(char** env)
@@ -94,3 +82,4 @@ char**	ft_add_char(t_path* main)
 	//ft_general_free(main);
 	return (main->final_matrix);
 }
+
