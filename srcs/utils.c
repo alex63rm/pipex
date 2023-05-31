@@ -6,11 +6,21 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:49 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/28 20:42:30 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/31 22:26:32 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+int	ft_count_lines(char**	path_matrix)
+{
+	int	i;
+
+	i = 0;
+	while (path_matrix[i])
+		i++;
+	return (i);
+}
 
 
 // temporary function
@@ -65,21 +75,20 @@ all the directories can be used later on to find the commands
 char**	ft_add_char(t_path* main)
 {
 	int 	i;
-	//char**	final_matrix;
 
-	//final_matrix = NULL;
-	// ¿POR QUE NECESITO ESTA IGUALDAD????
-	//main->final_matrix = (char**)malloc(sizeof(char *) * 100);
-	// AQUI TENGO MEMORY LEAKS
-	main->final_matrix = main->path_matrix;
+	main->final_matrix = (char **)malloc(sizeof(char *) * main->lines + 1);
+	// if (!main->final_matrix)
 	i = 0;
-	while (main->path_matrix[i])
+	while (main->path_matrix[i] && main->lines > 0)
 	{
 		main->final_matrix[i] = ft_strjoin(main->path_matrix[i], "/");
-		//printf("paths are %s\n", main->final_matrix[i]);
+		fprintf(stderr, "paths are %s\n", main->final_matrix[i]);
+		fprintf(stderr, "line is %d\n", i);
 		i++;
+		main->lines--;
 	}
-
+	fprintf(stderr, "final is %d\n", i);
+	//main->final_matrix[i] = 0x00;
 	//ft_general_free(main);
 	return (main->final_matrix);
 }

@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:26 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/28 22:12:38 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/31 22:19:37 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	ft_init_struct(t_path* main, char** argv)
 	main->cmd_one = argv[2];
 	main->cmd_two = argv[3];
 	main->cmd_list = NULL;
+	main->lines = 0;
+	main->path_command = NULL;
 	printf("finished initializing variables\n");
 }
 
@@ -66,8 +68,12 @@ int	main(int argc, char** argv, char** envp)
 		main.path = ft_get_path(envp);
 		//printf("%s\n", main.path);
 		main.path_matrix = ft_split(main.path, ':');
+		ft_print_env(main.path_matrix);
+		main.lines = ft_count_lines(main.path_matrix);
+		printf("lines: ||||%d||||\n", main.lines);
 		//ft_print_env(main.path_matrix);
 		// CREO QUE AQUI TENGO LEAK, EN FT_ADD_CHAR
+		printf("llega\n");
 		main.final_matrix = ft_add_char(&main);
 		printf("---------------final matrix-------------\n");
 		ft_print_env(main.final_matrix);
