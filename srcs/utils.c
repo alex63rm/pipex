@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:49 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/31 22:26:32 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/05/31 22:53:33 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,15 @@ char**	ft_add_char(t_path* main)
 {
 	int 	i;
 
-	main->final_matrix = (char **)malloc(sizeof(char *) * main->lines + 1);
+	main->final_matrix = (char **)malloc(sizeof(char *) * main->lines );
 	// if (!main->final_matrix)
 	i = 0;
-	while (main->path_matrix[i] && main->lines > 0)
+	while (main->path_matrix[i] && i <= 7)
 	{
 		main->final_matrix[i] = ft_strjoin(main->path_matrix[i], "/");
 		fprintf(stderr, "paths are %s\n", main->final_matrix[i]);
 		fprintf(stderr, "line is %d\n", i);
 		i++;
-		main->lines--;
 	}
 	fprintf(stderr, "final is %d\n", i);
 	//main->final_matrix[i] = 0x00;
