@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:43 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/31 21:19:02 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:02:49 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ typedef	struct	s_path
 	int		fd_out;
 	char*	path;
 	char**	path_matrix;  // this is the matrix without the last /
-	int		lines;
-	char**	final_matrix; // (this is the matrix with the last /)
 	int		pid;
 	int		fd[2];
 	char*	cmd_one;
@@ -49,7 +47,6 @@ char*	ft_strjoin(char const *s1, char const *s2);
 
 void	ft_exit_error(int err_code, t_path* main);
 char*	ft_get_path(char** env);
-int		ft_count_lines(char**	path_matrix);
 void	ft_print_env(char** env);	// DELETE
 void	ft_general_free(t_path* main);
 char**	ft_add_char(t_path* main);

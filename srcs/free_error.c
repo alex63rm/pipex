@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:35 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/31 21:41:26 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:03:34 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,6 @@ void	ft_general_free(t_path* main)
 			i++;
 		}
 		free(main->path_matrix);
-	}
-
-	i = 0;
-	if (main->final_matrix != NULL)
-	{
-		while (main->final_matrix[i])
-		{
-			free(main->final_matrix[i]);
-			i++;
-		}
-		free(main->final_matrix);
 	}
 	
 	i = 0;

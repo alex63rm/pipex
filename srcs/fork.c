@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:13:30 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/31 22:51:20 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:01:50 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,19 @@ static int	ft_join_command(t_path *main)
 {
 	fprintf(stderr, "entered ft_join_command\n");
 	int		i;
+	char	*cmd_list_slash;
+
+	cmd_list_slash = ft_strjoin("/", main->cmd_list[0]);
 
 	i = 0;
-	while (main->final_matrix[i])
+	while (main->path_matrix[i])
 	{
 		
-		main->path_command = ft_strjoin(main->final_matrix[i], main->cmd_list[0]);
+		main->path_command = ft_strjoin(main->path_matrix[i], cmd_list_slash);
 		fprintf(stderr, "path is: %s\n", main->path_command);	
 		if (access(main->path_command, F_OK) == 0)
 		{
+			free(cmd_list_slash);
 			fprintf(stderr, "path is: %s\n", main->path_command);	
 			return (0);
 		}
@@ -38,6 +42,7 @@ static int	ft_join_command(t_path *main)
 		free(main->path_command);
 		i++;
 	}
+	free(cmd_list_slash);
 	// if not found
 	return (1);
 }

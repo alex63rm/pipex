@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:49 by alejarod          #+#    #+#             */
-/*   Updated: 2023/05/31 22:53:33 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:03:16 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,4 @@ char* ft_get_path(char** envp)
 	}
 	ft_exit_error(4, NULL);
 	return (NULL);
-}
-
-/*
-This function takes the path matrix and will add the final '/' so that
-all the directories can be used later on to find the commands
-*/
-char**	ft_add_char(t_path* main)
-{
-	int 	i;
-
-	main->final_matrix = (char **)malloc(sizeof(char *) * main->lines );
-	// if (!main->final_matrix)
-	i = 0;
-	while (main->path_matrix[i] && i <= 7)
-	{
-		main->final_matrix[i] = ft_strjoin(main->path_matrix[i], "/");
-		fprintf(stderr, "paths are %s\n", main->final_matrix[i]);
-		fprintf(stderr, "line is %d\n", i);
-		i++;
-	}
-	fprintf(stderr, "final is %d\n", i);
-	//main->final_matrix[i] = 0x00;
-	//ft_general_free(main);
-	return (main->final_matrix);
 }
