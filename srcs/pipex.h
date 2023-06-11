@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:43 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/08 22:02:49 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:40:48 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef	struct	s_path
 char**	ft_split(char const *s, char c);
 char*	ft_strchr(const char *s, int c);
 char*	ft_strjoin(char const *s1, char const *s2);
+void	ft_putstr_fd(char *s, int fd);
 
 //----------------------------------MAIN-------------------------------------
 
@@ -50,7 +51,7 @@ char*	ft_get_path(char** env);
 void	ft_print_env(char** env);	// DELETE
 void	ft_general_free(t_path* main);
 char**	ft_add_char(t_path* main);
-void	ft_fork(t_path* main, char** envp);
+void	ft_process(t_path* main, char** envp);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:35 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/08 22:03:34 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:39:56 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,18 @@ where we exit with exit code 127: command not found
 void	ft_exit_error(int err_code, t_path* main)
 {
 	if (err_code == 1)
-		perror("Error. Input or output file error\n");
+		ft_putstr_fd("Error. fd error\n", 2);
+	if (err_code == 2)
+		ft_putstr_fd("Error. Path not found in environment\n", 2);
+	if (err_code == 3)
+		ft_putstr_fd("Error. Unable to create fork\n", 2);
 	if (err_code == 4)
-		perror("Error. Path not found\n");
+		ft_putstr_fd("Error. Command not found\n", 2);
 	if (err_code == 5)
-		perror("Error. Unable to create pid fork\n");
-	if (err_code == 6)
-		perror("Error. Unable to run execve()\n");
-	if (err_code == 7)
-		perror("Error. Unable to save argument list\n");
-	if (err_code == 8)
-		perror("Error. Command not found in PATH\n");
+		ft_putstr_fd("Error. Unable to create pipe\n", 2);
 	ft_general_free(main);
-	if (err_code == 8)
+	// esto es para que salga con el mismo error code
+	if (err_code == 4)
 		exit(127);
 	exit(1);
 }

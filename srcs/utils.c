@@ -6,22 +6,11 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:49 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/08 22:03:16 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/11 11:37:40 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	ft_count_lines(char**	path_matrix)
-{
-	int	i;
-
-	i = 0;
-	while (path_matrix[i])
-		i++;
-	return (i);
-}
-
 
 // temporary function
 void ft_print_env(char** env)
@@ -55,7 +44,7 @@ char* ft_get_path(char** envp)
 		{
 			if (envp[i][0] == 'P' && envp[i][1] == 'A' && envp[i][2] == 'T' && envp[i][3] == 'H')
 			{
-				printf("found path\n");
+				//printf("found path\n");
 				temp_path = envp[i];
 				final_path = ft_strchr(temp_path, '/');
 				return (final_path);
@@ -64,6 +53,6 @@ char* ft_get_path(char** envp)
 		}
 		i++;
 	}
-	ft_exit_error(4, NULL);
+	ft_exit_error(2, NULL);
 	return (NULL);
 }
