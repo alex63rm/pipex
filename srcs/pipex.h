@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:43 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/11 11:40:48 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:27:44 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,34 @@
 
 //--------------------------------STRUCT-------------------------------------
 
-typedef	struct	s_path
+typedef struct	s_path
 {
 	int		fd_in;
 	int		fd_out;
-	char*	path;
-	char**	path_matrix;  // this is the matrix without the last /
+	char	*path;
+	char	**path_matrix;
 	int		pid;
 	int		fd[2];
-	char*	cmd_one;
-	char*	cmd_two;
-	char**	cmd_list;
-	char*	path_command;
+	char	*cmd_one;
+	char	*cmd_two;
+	char	**cmd_list;
+	char	*path_command;
 	
 } t_path;
 
-
 //---------------------------------LIBFT--------------------------------------
 
-char**	ft_split(char const *s, char c);
-char*	ft_strchr(const char *s, int c);
-char*	ft_strjoin(char const *s1, char const *s2);
+char	**ft_split(char const *s, char c);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_putstr_fd(char *s, int fd);
 
 //----------------------------------MAIN-------------------------------------
 
-void	ft_exit_error(int err_code, t_path* main);
-char*	ft_get_path(char** env);
-void	ft_print_env(char** env);	// DELETE
-void	ft_general_free(t_path* main);
-char**	ft_add_char(t_path* main);
-void	ft_process(t_path* main, char** envp);
-
-
+void	ft_exit_error(int err_code, t_path *main);
+char	*ft_get_path(char **env);
+void	ft_print_env(char **env);	// DELETE
+void	ft_general_free(t_path *main);
+void	ft_process(t_path *main, char **envp);
 
 #endif

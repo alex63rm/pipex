@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:13:30 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/11 11:48:14 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:33:14 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,18 @@ or cannot be accessed, the function returns 1.
 */
 static int	ft_join_command(t_path *main)
 {
-	//fprintf(stderr, "entered ft_join_command\n");
 	int		i;
 	char	*cmd_list_slash;
 
 	cmd_list_slash = ft_strjoin("/", main->cmd_list[0]);
-
 	i = 0;
 	while (main->path_matrix[i])
 	{
-		
 		main->path_command = ft_strjoin(main->path_matrix[i], cmd_list_slash);
-		//fprintf(stderr, "path is: %s\n", main->path_command);	
-		if (access(main->path_command, F_OK) == 0)
+		// REVISAR F_OK
+		if (access(main->path_command, F_OK | 1) == 0)
 		{
 			free(cmd_list_slash);
-			//fprintf(stderr, "path is: %s\n", main->path_command);	
 			return (0);
 		}
 		free(main->path_command);
@@ -49,44 +45,33 @@ static int	ft_join_command(t_path *main)
 }
 
 /*
-This function first splits the first command and its options or flags and saves it
-in a 2D array (or list of arrays).
-Then it checks if the command was found and can be accessed.
-Finally it executes the command, which means the whole process is replaced and it
-acts as a return.
+This function first splits the first command and its options or flags and saves
+it in a 2D array (or list of arrays). Then it checks if the command was found 
+and can be accessed. Finally it executes the command, which means the whole 
+process is replaced and it acts as a return.
 */
-static void	ft_child(t_path* main, char** envp)
+static void	ft_child(t_path *main, char **envp)
 {
-	//printf("entered ft_child\n");
-	// read from the infile
 	dup2(main->fd_in, STDIN_FILENO);
-	// write to fd[1], the pipe
 	dup2(main->fd[1], STDOUT_FILENO);
-	// close what is not needed
 	close(main->fd_in);
 	close(main->fd[1]);
-	// close the rest that are not needed
 	close(main->fd[0]);
 	close(main->fd_out);
 	main->cmd_list = ft_split(main->cmd_one, ' ');
-	
-	//fprintf(stderr, "first command is: ||%s||\n", main->cmd_list[0]);
 	if (ft_join_command(main) == 1)
 		ft_exit_error(4, main);
-
-	// perror prints to 2, so I can see it in the screen
-	//fprintf(stderr, "|||||command_found||||||\n");
 	execve(main->path_command, main->cmd_list, envp);
 }
 
 /*
-This function first splits the second command and its options or flags and saves it
-in a 2D array (or list of arrays).
+This function first splits the second command and its options or flags and saves
+it in a 2D array (or list of arrays).
 Then it checks if the command was found and can be accessed.
 Finally it executes the command, which means the whole process is replaced and it
 acts as a return.
 */
-static void	ft_parent(t_path* main, char** envp)
+static void	ft_parent(t_path *main, char **envp)
 {
 	dup2(main->fd[0], STDIN_FILENO);
 	dup2(main->fd_out, STDOUT_FILENO);
@@ -95,13 +80,8 @@ static void	ft_parent(t_path* main, char** envp)
 	close(main->fd[1]);
 	close(main->fd_in);
 	main->cmd_list = ft_split(main->cmd_two, ' ');
-	//fprintf(stderr, "argv[3] is: %s\n", main->cmd_list[0]);
-	
-	//fprintf(stderr, "second command is: ||%s||\n", main->cmd_list[0]);
 	if (ft_join_command(main) == 1)
 		ft_exit_error(4, main);
-	
-	//fprintf(stderr, "|||||command_found||||||\n");
 	execve(main->path_command, main->cmd_list, envp);
 }
 
@@ -115,31 +95,25 @@ It returns -1 if there was an error
 Both processes start running in paralel, so we need to control
 the flow: in this case, make the parent wait for the child to finish
 */
-void	ft_process(t_path* main, char** envp)
+void	ft_process(t_path *main, char **envp)
 {
-		if (pipe(main->fd) == -1)
-			ft_exit_error(5, main);
-		//printf("pipe fd[0] is %d\n", main->fd[0]);
-		//printf("pipe fd[1] is %d\n", main->fd[1]);
-		main->pid = fork();
-		if (main->pid == -1)
-			ft_exit_error(3, main);
-		if (main->pid == 0)
-		{
-			printf("I am in the child\n");
-			//printf("child pid is: |%d|\n", getpid());
-			ft_child(main, envp);
-			
-			// I can even finish the child process
-			//ft_exit_error(3, NULL); 
-			return ;
-		}
-		else
-		{
-			wait(NULL);
-			printf("I am in the parent\n");
-			ft_parent(main, envp);
-			//printf("parent pid is: |%d|\n", getpid());
-
-		}
+	int	status;
+	
+	if (pipe(main->fd) == -1)
+		ft_exit_error(5, main);
+	main->pid = fork();
+	if (main->pid == -1)
+		ft_exit_error(3, main);
+	if (main->pid == 0)
+	{
+		ft_putstr_fd("I am in the child\n", 2);
+		ft_child(main, envp);
+		return ;
+	}
+	else
+	{
+		waitpid(main->pid, &status, 0);
+		ft_putstr_fd("I am in the parent\n", 2);
+		ft_parent(main, envp);
+	}
 }
