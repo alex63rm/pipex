@@ -6,16 +6,14 @@
 #    By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/13 13:20:31 by alejarod          #+#    #+#              #
-#    Updated: 2023/05/28 18:56:01 by alejarod         ###   ########.fr        #
+#    Updated: 2023/06/14 20:32:46 by alejarod         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME = pipex
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g3 # -fsanitize=address
-SANITIZE = -g3 -fsanitize=address
-VALGRIND = -g
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 RM = rm
 AR = ar rcs
 
@@ -36,27 +34,29 @@ HEADER = $(SRCS_PATH)/pipex.h
 OBJS_PATH = ./objs
 OBJS = $(addprefix $(OBJS_PATH)/, $(SRCS:.c=.o))
 
-#Object rule and move them to the object folder
-$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c | $(OBJS_PATH)
-	$(CC) $(CFLAGS) -c $^ -o $@
+
+
 
 # rules
 all: $(NAME)
 
-$(NAME): $(OBJS)
+#Object rule and move them to the object folder
+$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+$(NAME): libft/libft.a $(OBJS)
 	@echo $(GREEN)"compiling libft!"$(RESET_BLACK)
 	make -C $(LIBFT_PATH)
 	@echo $(GREEN)"libft compiled!"$(RESET_BLACK)
-	$(CC) $^ $(LIBFT_A) -o $@
+	$(CC) $(CFLAGS) $^ $(LIBFT_A) -o $@
 	@echo $(GREEN)"pipex compiled !"$(RESET_BLACK)
 
 #create the object directory
 $(OBJS_PATH):
 	mkdir $@
-
-sanitize:
-
-valgrind:
+	
+libft/libft.a:
+	make -C $(LIBFT_PATH)
 
 normi:
 	norminette $(SRCS_PATH)/*.c $(HEADER)
@@ -68,11 +68,11 @@ clean:
 	@echo $(RED)"OBJS DELETED !"$(RESET_BLACK)
 
 # removes .o files & push_swap executable
-fclean: clean
+fclean: clean 
 	@$(RM) $(NAME)
 	make -C $(LIBFT_PATH) fclean
 	@echo $(RED)"pipex deleted !"$(RESET_BLACK)
 
-re: fclean all
+re: fclean all $(OBJS_PATH)
 
 .PHONY: all sanitize clean fclean re

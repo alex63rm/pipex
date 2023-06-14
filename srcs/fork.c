@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:13:30 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/13 21:33:14 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/14 19:58:01 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void	ft_process(t_path *main, char **envp)
 	{
 		ft_putstr_fd("I am in the child\n", 2);
 		ft_child(main, envp);
-		return ;
 	}
 	else
 	{

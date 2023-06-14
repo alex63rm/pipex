@@ -6,12 +6,13 @@
 #    By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/14 00:18:13 by alejarod          #+#    #+#              #
-#    Updated: 2022/10/01 12:38:45 by alejarod         ###   ########.fr        #
+#    Updated: 2023/06/14 20:24:34 by alejarod         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # ========== VARIABLES ==========
 NAME		= libft.a
+CC 			= gcc
 
 SRC			= ./ft_isalpha.c	\
 			  ./ft_isdigit.c	\
@@ -61,7 +62,7 @@ SRC_BONUS	= ./ft_lstnew_bonus.c		\
 OBJ			= $(SRC:.c=.o)
 OBJ_BONUS	= $(SRC_BONUS:.c=.o)
 
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
 
 # ========== RULES ==========
 
