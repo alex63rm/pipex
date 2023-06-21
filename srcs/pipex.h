@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:43 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/14 20:05:39 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:32:54 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 //--------------------------------STRUCT-------------------------------------
 
-typedef struct	s_path
+typedef struct s_path
 {
 	int		fd_in;
 	int		fd_out;
@@ -33,8 +33,8 @@ typedef struct	s_path
 	char	*cmd_two;
 	char	**cmd_list;
 	char	*path_command;
-	
-} t_path;
+
+}	t_path;
 
 //---------------------------------LIBFT--------------------------------------
 
@@ -47,7 +47,7 @@ void	ft_putstr_fd(char *s, int fd);
 
 void	ft_exit_error(int err_code, t_path *main);
 char	*ft_get_path(char **env);
-void	ft_print_env(char **env);	// DELETE
+void	ft_print_env(char **env);
 void	ft_general_free(t_path *main);
 void	ft_process(t_path *main, char **envp);
 

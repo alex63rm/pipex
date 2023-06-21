@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:12:26 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/14 21:34:26 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/21 20:09:20 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ argv[0], argv[1], argv[2], argv[3], argv[4]
 ./pipex  infile    cmd1     cmd2	outfile
 1. First we need to open the infile
 2. We need to open or create the outfile
+	O_TRUNC -> replace the content of the file
+	0644 user->r&w, group->r, others->r
 3. Now we have 5 fd open: stdin (0), stdout (1), stderr(2), fd_in(3), fd_out(4)
 4. Now, from the envp variable that contains a lot of data, we need several 
 things:
@@ -50,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		ft_init_struct(&main, argv);
 		main.fd_in = open(argv[1], O_RDONLY);
-		main.fd_out = open(argv[4], O_WRONLY | O_CREAT, 0644);
+		main.fd_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (main.fd_in < 0 || main.fd_out < 0)
 			ft_exit_error(1, &main);
 		main.path = ft_get_path(envp);

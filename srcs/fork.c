@@ -6,7 +6,7 @@
 /*   By: alejarod <alejarod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:13:30 by alejarod          #+#    #+#             */
-/*   Updated: 2023/06/14 19:58:01 by alejarod         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:36:34 by alejarod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ flags).
 First, we need to add a slash to the command name, because the path splitted
 does not include a slash at the end
 It loops over all the paths and checks if the command name is found
-and can be accessed with the access function. If the command is not found 
-or cannot be accessed, the function returns 1.
+and can be accessed with the access function. 
+F_OK-> file_exists
+X_OK-> file_is_executable
+If the command is not found or cannot be accessed, the function returns 1.
 */
 static int	ft_join_command(t_path *main)
 {
@@ -31,8 +33,7 @@ static int	ft_join_command(t_path *main)
 	while (main->path_matrix[i])
 	{
 		main->path_command = ft_strjoin(main->path_matrix[i], cmd_list_slash);
-		// REVISAR F_OK
-		if (access(main->path_command, F_OK | 1) == 0)
+		if (access(main->path_command, F_OK | X_OK) == 0)
 		{
 			free(cmd_list_slash);
 			return (0);
@@ -98,7 +99,7 @@ the flow: in this case, make the parent wait for the child to finish
 void	ft_process(t_path *main, char **envp)
 {
 	int	status;
-	
+
 	if (pipe(main->fd) == -1)
 		ft_exit_error(5, main);
 	main->pid = fork();
@@ -106,13 +107,11 @@ void	ft_process(t_path *main, char **envp)
 		ft_exit_error(3, main);
 	if (main->pid == 0)
 	{
-		ft_putstr_fd("I am in the child\n", 2);
 		ft_child(main, envp);
 	}
 	else
 	{
 		waitpid(main->pid, &status, 0);
-		ft_putstr_fd("I am in the parent\n", 2);
 		ft_parent(main, envp);
 	}
 }
